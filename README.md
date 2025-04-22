@@ -40,7 +40,7 @@ _**Completion State:**_ a formal policy is enacted, stakeholder buy-in is secure
 ### Vulnerability Management Policy Draft Creation
 
 This phase focuses on drafting a Vulnerability Management Policy as a starting point for stakeholder engagement. The initial draft outlines scope, responsibilities, and remediation timelines, and may be adjusted based on feedback from relevant departments to ensure practical implementation before final approval by upper management.  
-[Draft Policy](https://docs.google.com/document/d/1CLSWm1_9JL1oUqgyNNwtPXW6FzXJ7ddVnSAUQTyqC8I/edit?usp=drive_link)
+[Draft Policy](https://docs.google.com/document/d/1dKZhAS2cY65BKnCFbKsFKswdkFmZsQ1QVM8IMyucsr0/edit?tab=t.0)
 
 ---
 
@@ -48,9 +48,42 @@ This phase focuses on drafting a Vulnerability Management Policy as a starting p
 
 In this phase, a meeting with the server team introduces the draft Vulnerability Management Policy and assesses their capability to meet remediation timelines. Feedback leads to adjustments, like extending the critical remediation window from 48 hours to one week, ensuring collaborative implementation.
 
-<a href='https://youtu.be/8g6uafc6LjE' target="_"><img width="600" alt="image" src="https://github.com/user-attachments/assets/549d21f4-26c2-412d-9117-d7b6835aedbf"></a>
+**Wilson:**  
+Morning, Jimmy! How’s everything going lately? Feels like it’s been nonstop these last few weeks.
 
-[YouTube Video: Stakeholder Policy Buy-In Meeting](https://youtu.be/8g6uafc6LjE)
+**Jimmy:**  
+Morning, Wilson. Yeah, it’s been a little crazy, but we’re managing. Appreciate you checking in.  
+I went through the draft policy, it makes sense overall. That said, with where we’re at staffing-wise, hitting those remediation timelines, especially the 48-hour one for criticals... it's going to be tough.
+
+**Wilson:**  
+Yeah, I figured that might be a pain point. It is pretty aggressive, especially right out of the gate.  
+I'll tel you what, what if we stretched the critical window to a week for now? We could save the 48-hour window for the really nasty stuff, like zero-days for software we currently have.
+
+**Jimmy:**  
+That actually sounds like a good middle ground. Thanks for being flexible on this.  
+Would it be okay if we also had a little breathing room early on? Just while we get used to the process... maybe the first few months?
+
+**Wilson:**  
+Absolutely. Once the policy’s finalized, we’ll officially roll things out, but the plan is to give all the teams around six months to adjust and settle in.  Does that work for you?
+
+**Jimmy:**  
+Yeah, that works. We’ll get on it.  
+Really appreciate you looping us in on this. Tt helps to feel like we’re part of the solution instead of just reacting to it.
+
+**Wilson:**  
+Totally. We’re all trying to pull in the same direction here. Thanks for being open about what you need.
+
+**Jimmy:**  
+No problem, and hey, thanks for keeping this meeting short.
+
+**Wilson:**  
+Anytime. Short meetings are the best meetings.
+
+**Jimmy:**  
+Can’t argue with that. Catch you later!
+
+**Wilson:**  
+Have a good day! Bye.
 
 ---
 
