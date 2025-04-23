@@ -40,6 +40,7 @@ _**Completion State:**_ a formal policy is enacted, stakeholder buy-in is secure
 ### Vulnerability Management Policy Draft Creation
 
 This phase focuses on drafting a Vulnerability Management Policy as a starting point for stakeholder engagement. The initial draft outlines scope, responsibilities, and remediation timelines, and may be adjusted based on feedback from relevant departments to ensure practical implementation before final approval by upper management.  
+
 [Draft Policy](https://docs.google.com/document/d/1dKZhAS2cY65BKnCFbKsFKswdkFmZsQ1QVM8IMyucsr0/edit?tab=t.0)
 
 ---
@@ -89,10 +90,14 @@ Have a good day! Bye.
 
 ### Step 3) Policy Finalization and Senior Leadership Sign-Off
 
-After gathering feedback from the server team, the policy is revised, addressing aggressive remediation timelines. With final approval from upper management, the policy now guides the program, ensuring compliance and reference for pushback resolution.  
-[Finalized Policy](https://docs.google.com/document/d/1rvueLX_71pOR8ldN9zVW9r_zLzDQxVsnSUtNar8ftdg/edit?usp=drive_link)
-<div style="text-align: center;">
-    <img src="https://github.com/user-attachments/assets/9afcdbc1-0493-4af2-9287-1cb9b8f59b40" alt="image" width="400">
+![image](https://github.com/user-attachments/assets/85a75c8b-1a8b-4bd4-8d71-528f49cffe09)
+
+After gathering feedback from the server team, the policy is revised, addressing aggressive remediation timelines. With final approval from upper management, the policy now guides the program, ensuring compliance and reference for pushback resolution. 
+ 
+[Finalized Policy](https://docs.google.com/document/d/1Ees8s1ueW-URcNuc7B3n0RGmzhPNaycNtTAPiZHZEKc/edit?tab=t.0)
+
+
+
 </div>
 
 ---
@@ -101,9 +106,57 @@ After gathering feedback from the server team, the policy is revised, addressing
 
 The team collaborates with the server team to initiate scheduled credential scans. A compromise is reached to scan a single server first, monitoring resource impact, and using just-in-time Active Directory credentials for secure, controlled access.  
 
-<a href='https://youtu.be/lg068WA4SKM' target="_"><img width="600" alt="image" src="https://github.com/user-attachments/assets/31fe8d0f-636b-475b-8d5a-a2795c183f86"></a>
+**Wilson:**  
+Hey Jimmy, morning!
 
-[YouTube Video: Initial Discovery Scan](https://youtu.be/lg068WA4SKM)
+**Jimmy:**  
+Morning, Wilson. I heard you're getting ready to kick off some scans?
+
+**Wilson:**  
+Yep, now that we’ve got the vulnerability management policy in place, I figured it’s a good time to start scheduling some credentialed scans of your environment. I also figured I'd do the polite thing and let you know before I start.
+
+**Jimmy:**  
+Alright, sounds fair. What’s the process look like? Anything you need from us?
+
+**Wilson:**  
+Yeah, so we’re planning to run weekly scans on the server infrastructure. Scanning all 200 assets should take around 4 to 6 hours.  
+To do it properly, we’ll need administrative credentials so that way the scan engine can log into each system and get deeper visibility into potential issues.
+
+**Jimmy:**  
+Hmm, okay. But what exactly does the scan do? I’m a little concerned about how much load it puts on the servers.  
+And you’re asking for admin access to *everything*? That gives me a bit of worry. 
+
+**Wilson:**  
+Totally get it. The scanner sends targeted traffic to each system, stuff like checking for known vulnerabilities, out-of-date software, weak protocols, that kind of thing. It also looks at registry settings and installed applications deep on the operating system.  
+The credentials just let it access those deeper system details. It’s not actually executing anything destructive or invasive.
+
+**Jimmy:**  
+Got it. So it’s more like deep inspection. As long as it’s not going to spike CPU or take anything offline, I think we’re okay with that.
+
+**Wilson:**  
+Exactly. We can start small, maybe just scan one system first and monitor how it behaves. That’ll give us both some peace of mind.
+
+**Jimmy:**  
+Yeah, I like that. Easier to explain if anything goes sideways.
+
+**Wilson:**  
+For sure. Also, on the credential side, can you set up a dedicated account in Active Directory for us? Something we can leave disabled until we’re ready to scan, then enable temporarily and shut off right after?  
+Basically a just-in-time access setup.
+
+**Jimmy:**  
+Yeah, that works. I’ll have Susan spin something up and we can automate the provisioning piece. I’d rather not keep those accounts live longer than necessary.
+
+**Wilson:**  
+Perfect. Appreciate that. I’ll check back once you’ve got it in place, and we’ll get the first scan on the calendar.
+
+**Jimmy:**  
+Cool. Thanks for walking through all that—makes a lot more sense now.
+
+**Wilson:**  
+Anytime. Talk to you later!
+
+**Jimmy:**  
+Later, Wilson.
 
 ---
 
@@ -111,9 +164,9 @@ The team collaborates with the server team to initiate scheduled credential scan
 
 In this phase, an insecure Windows Server is provisioned to simulate the server team's environment. After creating vulnerabilities, an authenticated scan is performed, and the results are exported for future remediation steps.  
 
-<img width="635" alt="image" src="https://github.com/user-attachments/assets/937cccbd-36bb-4445-97b9-e915085cda81" style="border: 2px solid black;">
+![image](https://github.com/user-attachments/assets/a77d0d1b-e95f-4a9d-a4b1-306472fd8faf)
 
-[Scan 1 - Initial Scan](https://drive.google.com/file/d/1RBPVj_azKJMwmRZ8QILlb4hxIjQU3wQ7/view?usp=drive_link)
+[Scan 1 - Initial Scan](https://drive.google.com/file/d/1c2AEwFQscE3khnZ12iaaJcYt_14c89tc/view?usp=sharing)
 
 
 
@@ -124,10 +177,10 @@ In this phase, an insecure Windows Server is provisioned to simulate the server 
 
 We assessed vulnerabilities and established a remediation prioritization strategy based on ease of remediation and impact. The following priorities were set:
 
-1. Third Party Software Removal (Wireshark)
-2. Windows OS Secure Configuration (Protocols & Ciphers)
-3. Windows OS Secure Configuration (Guest Account Group Membership)
-4. Windows OS Updates
+1. Third Party Software Removal (Wireshark, easiest to get rid of)
+2. Windows OS Secure Configuration (Protocols & Ciphers, second easiest to get rid of with registry modifications)
+3. Windows OS Secure Configuration (Guest Account Group Membership, could be harder if the guest account was being actively used for a legitimate business process). 
+4. Windows OS Updates (Updates must be tested first, Windows is known for releasing glitchy patches)
 
 ---
 
@@ -145,9 +198,92 @@ The server team received remediation scripts and scan reports to address key vul
 
 The server team reviewed vulnerability scan results, identifying outdated software, insecure accounts, and deprecated protocols. The remediation packages were prepared for submission to the Change Control Board (CAB). 
 
-<a href="https://youtu.be/0tjjFewxSNw" target="_"><img width="600" src="https://github.com/user-attachments/assets/03027c66-5f7c-42d0-b6dd-09d053c040b1"/></a>
+This is a cleaned-up transcript of a real-world technical conversation between a security analyst (Wilson) and a system administrator (Jimmy). It reflects a follow-up discussion after a vulnerability scan was conducted on a set of internal servers. The conversation focuses on interpreting scan results, planning remediation, and ensuring minimal business impact.
 
-[Meeting Video](https://youtu.be/0tjjFewxSNw)
+**Wilson:**  
+Morning, Jimmy! How’s it going?
+
+**Jimmy:**  
+Not bad for a Monday. You?
+
+**Wilson:**  
+Still breathing, so no complaints.  
+Before we jump into the vulnerabilities, how did the scan go on your end? Any outages, resource spikes, or strange behavior?
+
+**Jimmy:**  
+Nope, smooth sailing. We kept an eye on things, and aside from a bunch of open connections, you wouldn’t have known anything was happening.
+
+**Wilson:**  
+That’s great to hear. We’ll continue monitoring just in case, but I’m not expecting any issues going forward.  
+Mind if we go into the findings?
+
+**Jimmy:**  
+Go for it.
+
+**Wilson:**  
+Alright. Sharing my screen now.  
+Most of the findings trace back to outdated versions of **Wireshark** being installed on several systems. That’s the bulk of it.
+
+**Jimmy:**  
+Ah yeah, I figured that might come up.
+
+**Wilson:**  
+Also noticed something odd; the local *Guest* account is a member of the **Administrators group** on a few boxes. That definitely shouldn’t be the case.
+
+**Jimmy:**  
+Yikes. That sounds bad, I'm surprised that was overlooked.
+
+**Wilson:**  
+Yep.  
+There are a few vulnerabilities tied to outdated Microsoft Edge Chromium versions and similar stuff that will likely be resolved through **Windows Updates**, so those aren’t as urgent.  
+The **self-signed certificate** warnings are also non-critical—it’s just local certs.
+
+**Jimmy:**  
+Makes sense.
+
+**Wilson:**  
+The stuff we do want to act on:
+- Deprecated protocols like **TLS 1.0 / 1.1**
+- **Medium-strength cipher suites**
+- Removing unnecessary software like **Wireshark**
+- Fixing that **Guest account membership**
+
+**Jimmy:**  
+Got it. Hopefully the same issues are present across most systems—that’ll make remediation easier.
+
+**Wilson:**  
+Exactly. Everything looks pretty uniform, which is great for scripting the fixes.
+
+**Jimmy:**  
+Do you anticipate any trouble disabling the older cipher suites and protocols?
+
+**Wilson:**  
+Not really. We’ll route it through the next **Change Control Board (CCB)** cycle just in case, but I don’t expect any blowback.  
+And uninstalling Wireshark or correcting account permissions should be low-risk. I’ll sync with the CIS admins just to double-check policy.
+
+**Jimmy:**  
+Sounds good.
+
+**Wilson:**  
+I’ll also put together a set of remediation packages—scripts, steps, documentation—to help streamline the whole process.
+
+**Jimmy:**  
+Appreciate that. Quick question, do we have patching in place for those Windows update-related findings?
+
+**Wilson:**  
+We do. Patch management is already in place, so updates should roll out automatically by next week.
+
+**Jimmy:**  
+Perfect.
+
+**Wilson:**  
+Alright. I’ll start building out the remediation plan and check back in before the next CAB.
+
+**Jimmy:**  
+Awesome. Talk to you soon.
+
+**Wilson:**  
+You got it. See you.
 
 ---
 
