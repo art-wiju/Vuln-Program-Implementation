@@ -1,6 +1,6 @@
 # Vulnerability Management Program Implementation
 
-In this project, we simulate the implementation of a comprehensive vulnerability management program, from inception to completion.
+In this project, we simulate the implementation of a comprehensive vulnerability management program, from inception to completion. It is important to note that in most organizations (especially highly regulated ones) there will most likely already be a vulnerability program in place, in which we would work to improve the existing processes. This is easier than the alternative, starting from scratch. 
 
 _**Inception State:**_ the organization has no existing policy or vulnerability management practices in place.
 
@@ -13,7 +13,7 @@ _**Completion State:**_ a formal policy is enacted, stakeholder buy-in is secure
 # Technology Utilized
 - Tenable (enterprise vulnerability management platform)
 - Azure Virtual Machines (Nessus scan engine + scan targets)
-- PowerShell & BASH (remediation scripts)
+- PowerShell (remediation scripts)
 
 ---
 
@@ -197,92 +197,25 @@ The server team received remediation scripts and scan reports to address key vul
 
 The server team reviewed vulnerability scan results, identifying outdated software, insecure accounts, and deprecated protocols. The remediation packages were prepared for submission to the Change Control Board (CAB). 
 
-This is a cleaned-up transcript of a real-world technical conversation between a security analyst (Wilson) and a system administrator (Jimmy). It reflects a follow-up discussion after a vulnerability scan was conducted on a set of internal servers. The conversation focuses on interpreting scan results, planning remediation, and ensuring minimal business impact.
+This is a summarized technical exchange between a security analyst and a system administrator following an internal vulnerability scan. The discussion focused on interpreting findings, prioritizing remediation, and coordinating implementation.
 
-**Wilson:**  
-Morning, Jimmy! How’s it going?
+---
 
-**Jimmy:**  
-Not bad for a Monday. You?
+## 🔍 Key Findings:
+- Outdated installations of **Wireshark**
+- Local *Guest* accounts with **Administrator privileges**
+- Use of deprecated protocols (**TLS 1.0 / 1.1**) and **medium-strength cipher suites**
+- Minor issues with **self-signed certificates** and outdated browsers (e.g., Edge)
 
-**Wilson:**  
-Still breathing, so no complaints.  
-Before we jump into the vulnerabilities, how did the scan go on your end? Any outages, resource spikes, or strange behavior?
+## 🧰 Planned Remediation:
+- Remove insecure software (e.g., Wireshark)
+- Correct privilege escalations (Guest ≠ Admin)
+- Disable legacy protocols/ciphers via scripted registry changes
+- Use **Windows Update** for browser/security patching
+- Route changes through the **Change Advisory Board (CAB)** for policy alignment
 
-**Jimmy:**  
-Nope, smooth sailing. We kept an eye on things, and aside from a bunch of open connections, you wouldn’t have known anything was happening.
-
-**Wilson:**  
-That’s great to hear. We’ll continue monitoring just in case, but I’m not expecting any issues going forward.  
-Mind if we go into the findings?
-
-**Jimmy:**  
-Go for it.
-
-**Wilson:**  
-Alright. Sharing my screen now.  
-Most of the findings trace back to outdated versions of **Wireshark** being installed on several systems. That’s the bulk of it.
-
-**Jimmy:**  
-Ah yeah, I figured that might come up.
-
-**Wilson:**  
-Also noticed something odd; the local *Guest* account is a member of the **Administrators group** on a few boxes. That definitely shouldn’t be the case.
-
-**Jimmy:**  
-Yikes. That sounds bad, I'm surprised that was overlooked.
-
-**Wilson:**  
-Yep.  
-There are a few vulnerabilities tied to outdated Microsoft Edge Chromium versions and similar stuff that will likely be resolved through **Windows Updates**, so those aren’t as urgent.  
-The **self-signed certificate** warnings are also non-critical—it’s just local certs.
-
-**Jimmy:**  
-Makes sense.
-
-**Wilson:**  
-The stuff we do want to act on:
-- Deprecated protocols like **TLS 1.0 / 1.1**
-- **Medium-strength cipher suites**
-- Removing unnecessary software like **Wireshark**
-- Fixing that **Guest account membership**
-
-**Jimmy:**  
-Got it. Hopefully the same issues are present across most systems—that’ll make remediation easier.
-
-**Wilson:**  
-Exactly. Everything looks pretty uniform, which is great for scripting the fixes.
-
-**Jimmy:**  
-Do you anticipate any trouble disabling the older cipher suites and protocols?
-
-**Wilson:**  
-Not really. We’ll route it through the next **Change Control Board (CCB)** cycle just in case, but I don’t expect any blowback.  
-And uninstalling Wireshark or correcting account permissions should be low-risk. I’ll sync with the CIS admins just to double-check policy.
-
-**Jimmy:**  
-Sounds good.
-
-**Wilson:**  
-I’ll also put together a set of remediation packages—scripts, steps, documentation—to help streamline the whole process.
-
-**Jimmy:**  
-Appreciate that. Quick question, do we have patching in place for those Windows update-related findings?
-
-**Wilson:**  
-We do. Patch management is already in place, so updates should roll out automatically by next week.
-
-**Jimmy:**  
-Perfect.
-
-**Wilson:**  
-Alright. I’ll start building out the remediation plan and check back in before the next CAB.
-
-**Jimmy:**  
-Awesome. Talk to you soon.
-
-**Wilson:**  
-You got it. See you.
+ ## Outcome:
+The environment appears consistent, enabling bulk fixes via scripted deployments. No impact observed during scanning, and updates are expected to resolve remaining lower-risk issues.
 
 ---
 
@@ -325,7 +258,7 @@ This is a summarized real-world example of a vulnerability remediation discussio
 ---
 ### Step 10 ) Remediation Effort
 
-#### Remediation Round 1: Outdated Wireshark Removal. Why do they even have Wireshark, anyway?
+#### Remediation Round 1: Outdated Wireshark Removal.
 
 The server team used a PowerShell script to remove outdated Wireshark. A follow-up scan confirmed successful remediation.  
 
@@ -374,15 +307,15 @@ Windows updates were re-enabled and applied until the system was fully up to dat
 
 The remediation process reduced total vulnerabilities by 80%, from 30 to 6. Critical vulnerabilities were resolved by the second scan (100%), and high vulnerabilities dropped by 90%. Mediums were reduced by 76%. In an actual production environment, asset criticality would further guide future remediation efforts.  
 
-<img width="1920" alt="image" src="https://github.com/user-attachments/assets/51f0aae8-7f36-4d90-b29f-5257e57155f9">
+![image](https://github.com/user-attachments/assets/230ae7f8-0fa4-4be8-91b7-963a47d49bcd)
 
-[Remediation Data](https://docs.google.com/spreadsheets/d/1FTtFfZYmFsNLU6pm8nTzsKyKE-d2ftXzX_DPwcnFNfA/edit?gid=0#gid=0)
+[Remediation Data](https://docs.google.com/spreadsheets/d/1abJJvAwxycSF6DgXybQ9c2FmKx7SZXHldeHMV_IZCRA/edit?usp=sharing)
 
 ---
 
 ### On-going Vulnerability Management (Maintenance Mode)
 
-After completing the initial remediation cycle, the vulnerability management program transitions into **Maintenance Mode**. This phase ensures that vulnerabilities continue to be managed proactively, keeping systems secure over time. Regular scans, continuous monitoring, and timely remediation are crucial components of this phase. (See [Finalized Policy](https://docs.google.com/document/d/1rvueLX_71pOR8ldN9zVW9r_zLzDQxVsnSUtNar8ftdg/edit?usp=drive_link) for scanning and remediation cadence requirements.)
+After completing the initial remediation cycle, the vulnerability management program transitions into **Maintenance Mode**. This phase ensures that vulnerabilities continue to be managed proactively, keeping systems secure over time. Regular scans, continuous monitoring, and timely remediation are crucial components of this phase. (See [Finalized Policy](https://docs.google.com/document/d/1Ees8s1ueW-URcNuc7B3n0RGmzhPNaycNtTAPiZHZEKc/edit?usp=sharing) for scanning and remediation cadence requirements.)
 
 Key activities in Maintenance Mode include:
 - **Scheduled Vulnerability Scans**: Perform regular scans (e.g., weekly or monthly) to detect new vulnerabilities as systems evolve.
