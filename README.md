@@ -188,9 +188,8 @@ We assessed vulnerabilities and established a remediation prioritization strateg
 
 The server team received remediation scripts and scan reports to address key vulnerabilities. This streamlined their efforts and prepared them for a follow-up review.  
 
-<img width="635" alt="image" src="https://github.com/user-attachments/assets/bbf9478f-e1d1-4898-846e-b510ec8c6f72">
+![image](https://github.com/user-attachments/assets/482ebcf2-ebad-49bf-a038-7e183518ae32)
 
-[Remediation Email](https://github.com/joshmadakor1/lognpacific-public/blob/main/misc/remediation-email.md)
 
 ---
 
@@ -291,51 +290,83 @@ You got it. See you.
 
 The Change Control Board (CAB) reviewed and approved the plan to remove insecure protocols and cipher suites. The plan included a rollback script and a tiered deployment approach.  
 
-<a href="https://youtu.be/zOFPkTa9kY8" target="_"><img width="600" src="https://github.com/user-attachments/assets/07164e63-fbce-471a-b469-29a6d41b7bb8"/></a>
+This is a summarized real-world example of a vulnerability remediation discussion and reflects collaboration between the Risk and Infrastructure teams.
 
-[Meeting Video](https://youtu.be/zOFPkTa9kY8)
+---
+
+## 🛠️ Remediation Summary
+
+### Objective:
+- **Disable** insecure TLS protocols (e.g., TLS 1.0, 1.1)
+- **Remove** weak cipher suites from Windows servers
+
+### Approach:
+- A **PowerShell script** was developed to update the Windows registry.
+- The script **disables** deprecated protocols and ciphers and **enables** only secure, modern ones (e.g., TLS 1.2/1.3 with strong AES ciphers).
+- Registry changes are **automated** and can be deployed in tiers.
+
+### Deployment Plan:
+1. **Pilot Group** – small set of low-risk systems
+2. **Pre-Production** – larger but still controlled deployment
+3. **Full Production Rollout** – across all applicable servers
+
+### Rollback Strategy:
+- A fully **automated rollback script** is included.
+- If issues arise, systems can restore the original cipher and protocol settings immediately.
+
+---
+
+## ✅ Key Takeaways
+
+- The team is proactively hardening encryption configurations without waiting for issues to surface.
+- Changes are controlled, reversible, and follow proper change management procedures.
+- The fix is lightweight and registry-based, requiring minimal downtime or resource overhead.
 
 ---
 ### Step 10 ) Remediation Effort
 
-#### Remediation Round 1: Outdated Wireshark Removal
+#### Remediation Round 1: Outdated Wireshark Removal. Why do they even have Wireshark, anyway?
 
 The server team used a PowerShell script to remove outdated Wireshark. A follow-up scan confirmed successful remediation.  
-[Wireshark Removal Script](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/remediation-wireshark-uninstall.ps1)  
 
-<img width="634" alt="image" src="https://github.com/user-attachments/assets/7b4f9ab2-d230-4458-ac0f-c0ff070ae79a">
+[Wireshark Removal Script](https://github.com/art-wiju/Vuln-Program-Implementation/commit/7e4f10a9947f615079d629ac6fc982b303fa4c5b)  
 
-[Scan 2 - Third Party Software Removal](https://drive.google.com/file/d/1UiwPPTtuSZKk02hiMyXf31pXUIeC5EWt/view?usp=drive_link)
+![image](https://github.com/user-attachments/assets/9560588e-7811-446a-8ecc-3a520a7dfd9d)
+
+[Scan 2 - Third Party Software Removal](https://drive.google.com/file/d/12RTBoIEB_ZWr_tJikjRhMGEHTXcAKzfW/view?usp=sharing)
 
 
 #### Remediation Round 2: Insecure Protocols & Ciphers
 
 The server team used PowerShell scripts to remediate insecure protocols and cipher suites. A follow-up scan verified successful remediation, and the results were saved for reference.  
-[PowerShell: Insecure Protocols Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-protocols.ps1)
-[PowerShell: Insecure Ciphers Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-cipher-suites.ps1)
 
-<img width="630" alt="image" src="https://github.com/user-attachments/assets/0e96120d-8ec9-4f76-8e42-79c752200010">
+[PowerShell: Insecure Protocols Remediation](https://github.com/art-wiju/Vuln-Program-Implementation/blob/main/toggle-protocols.ps1)
 
-[Scan 3 - Ciphersuites and Protocols](https://drive.google.com/file/d/1Qc6-ezQvwReCGUZNtnva0kCZo_-zW-Sm/view?usp=drive_link)
+[PowerShell: Insecure Ciphers Remediation](https://github.com/art-wiju/Vuln-Program-Implementation/blob/main/toggle-cipher-suites.ps1)
+
+![image](https://github.com/user-attachments/assets/82f81369-ffd2-410f-86ec-ad0ccb7b3cec)
+
+[Scan 3 - Ciphersuites and Protocols](https://drive.google.com/file/d/1MFJ8u0Yo32RP0NIncJtLOqVT1bY64maD/view?usp=sharing)
 
 
 #### Remediation Round 3: Guest Account Group Membership
 
 The server team removed the guest account from the administrator group. A new scan confirmed remediation, and the results were exported for comparison.  
-[PowerShell: Guest Account Group Membership Remediation](https://github.com/joshmadakor1/lognpacific-public/blob/main/automation/toggle-guest-local-administrators.ps1)  
 
-<img width="627" alt="image" src="https://github.com/user-attachments/assets/870a3eac-3398-44fe-91c0-96f3c2578df4">
+[PowerShell: Guest Account Group Membership Remediation](https://github.com/art-wiju/Vuln-Program-Implementation/blob/main/toggle-guest-local-administrators.ps1)  
 
-[Scan 4 - Guest Account Group Removal](https://drive.google.com/file/d/1jVgikjfrV1YjOcL3QRT_oUB0Y82w22V7/view?usp=drive_link)
+![image](https://github.com/user-attachments/assets/85978421-b40c-4737-ae75-31a6fd146e4f)
+
+[Scan 4 - Guest Account Group Removal](https://drive.google.com/file/d/1SBc5CDcun6BR0oLPHr1cvA83oeeOgkWx/view?usp=sharing)
 
 
 #### Remediation Round 4: Windows OS Updates
 
 Windows updates were re-enabled and applied until the system was fully up to date. A final scan verified the changes  
 
-<img width="627" alt="image" src="https://github.com/user-attachments/assets/870a3eac-3398-44fe-91c0-96f3c2578df4">
+![image](https://github.com/user-attachments/assets/4dc1881a-84f3-4d59-b580-24465dde6002)
 
-[Scan 5 - Post Windows Updates](https://drive.google.com/file/d/1tmDjeHl5uiGitRwWy8kFRi33q-nGi1Zt/view?usp=drive_link)
+[Scan 5 - Post Windows Updates](https://drive.google.com/file/d/1Kx5zHo404KajzTB45jh51uxseDt6JwdJ/view?usp=sharing)
 
 ---
 
